@@ -13,6 +13,8 @@
 		FE6E47F31B93E32F00D18625 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE6E47F21B93E32F00D18625 /* Images.xcassets */; };
 		FE6E47F61B93E32F00D18625 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE6E47F41B93E32F00D18625 /* LaunchScreen.xib */; };
 		FE6E48021B93E32F00D18625 /* KeychainSwiftExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6E48011B93E32F00D18625 /* KeychainSwiftExampleTests.swift */; };
+		FE6E480C1B93E3C900D18625 /* BHKeychainSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6E480B1B93E3C900D18625 /* BHKeychainSwift.swift */; };
+		FE6E480E1B93FFAF00D18625 /* ss.png in Resources */ = {isa = PBXBuildFile; fileRef = FE6E480D1B93FFAF00D18625 /* ss.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,8 @@
 		FE6E47FB1B93E32F00D18625 /* KeychainSwiftExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeychainSwiftExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE6E48001B93E32F00D18625 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FE6E48011B93E32F00D18625 /* KeychainSwiftExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainSwiftExampleTests.swift; sourceTree = "<group>"; };
+		FE6E480B1B93E3C900D18625 /* BHKeychainSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BHKeychainSwift.swift; sourceTree = "<group>"; };
+		FE6E480D1B93FFAF00D18625 /* ss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ss.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,8 +83,10 @@
 			children = (
 				FE6E47EB1B93E32F00D18625 /* AppDelegate.swift */,
 				FE6E47ED1B93E32F00D18625 /* ViewController.swift */,
+				FE6E480B1B93E3C900D18625 /* BHKeychainSwift.swift */,
 				FE6E47EF1B93E32F00D18625 /* Main.storyboard */,
 				FE6E47F21B93E32F00D18625 /* Images.xcassets */,
+				FE6E480D1B93FFAF00D18625 /* ss.png */,
 				FE6E47F41B93E32F00D18625 /* LaunchScreen.xib */,
 				FE6E47E91B93E32F00D18625 /* Supporting Files */,
 			);
@@ -192,6 +198,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE6E480E1B93FFAF00D18625 /* ss.png in Resources */,
 				FE6E47F11B93E32F00D18625 /* Main.storyboard in Resources */,
 				FE6E47F61B93E32F00D18625 /* LaunchScreen.xib in Resources */,
 				FE6E47F31B93E32F00D18625 /* Images.xcassets in Resources */,
@@ -214,6 +221,7 @@
 			files = (
 				FE6E47EE1B93E32F00D18625 /* ViewController.swift in Sources */,
 				FE6E47EC1B93E32F00D18625 /* AppDelegate.swift in Sources */,
+				FE6E480C1B93E3C900D18625 /* BHKeychainSwift.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
