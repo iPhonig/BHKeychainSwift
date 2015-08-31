@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="KeychainSwiftExample" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -15,8 +15,136 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text to display" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f6I-uq-XfX">
+                                <rect key="frame" x="155" y="140" width="290" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="Dpx-ef-FT6"/>
+                                    <constraint firstAttribute="width" constant="290" id="Pt3-U0-xgC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter text to save to keychain..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3Dy-bQ-sVf">
+                                <rect key="frame" x="155" y="79" width="290" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="290" id="0mP-dd-Ij8"/>
+                                    <constraint firstAttribute="height" constant="30" id="zqv-fd-Upe"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ejz-5J-R8a">
+                                <rect key="frame" x="228" y="185" width="145" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="145" id="WEe-I9-wR6"/>
+                                    <constraint firstAttribute="height" constant="30" id="dwI-Yu-FPw"/>
+                                </constraints>
+                                <state key="normal" title="Save as Public Key">
+                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="savePublicKey:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="HeG-9E-sfm"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cWE-Su-jcs">
+                                <rect key="frame" x="228" y="261" width="145" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="cpF-nx-AzI"/>
+                                    <constraint firstAttribute="width" constant="145" id="nnq-wZ-wxH"/>
+                                </constraints>
+                                <state key="normal" title="Save as Private Key">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="savePrivateKey:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="LZl-2k-2PD"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="izW-Fe-bO7">
+                                <rect key="frame" x="228" y="337" width="145" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="4Pi-Hy-tDt"/>
+                                    <constraint firstAttribute="width" constant="145" id="9C3-iC-mYC"/>
+                                </constraints>
+                                <state key="normal" title="Save as Password">
+                                    <color key="titleColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="savePassword:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="qn9-R6-IBk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Nj-e2-LNa">
+                                <rect key="frame" x="233" y="223" width="134" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="134" id="4ZP-NY-9Bk"/>
+                                    <constraint firstAttribute="height" constant="30" id="vUp-Bb-njZ"/>
+                                </constraints>
+                                <state key="normal" title="Retrieve Public Key">
+                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="retrievePublicKey:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="5Ic-W2-DCj"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fJj-GW-hFx">
+                                <rect key="frame" x="231" y="299" width="139" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="mch-Qe-Y41"/>
+                                    <constraint firstAttribute="width" constant="139" id="vQa-2u-WZc"/>
+                                </constraints>
+                                <state key="normal" title="Retrieve Private Key">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="retrievePrivateKey:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="kkc-La-PMW"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qQi-9Y-ymY">
+                                <rect key="frame" x="236" y="375" width="129" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="pT0-9X-Wkv"/>
+                                    <constraint firstAttribute="width" constant="129" id="yab-F0-scL"/>
+                                </constraints>
+                                <state key="normal" title="Retrieve Password">
+                                    <color key="titleColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="retrievePassword:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Qc0-nw-eQi"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="qQi-9Y-ymY" secondAttribute="centerX" id="5KK-eV-Dbv"/>
+                            <constraint firstItem="3Dy-bQ-sVf" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="59" id="6lT-bF-l4F"/>
+                            <constraint firstItem="f6I-uq-XfX" firstAttribute="top" secondItem="3Dy-bQ-sVf" secondAttribute="bottom" constant="31" id="72l-g8-wMj"/>
+                            <constraint firstItem="6Nj-e2-LNa" firstAttribute="top" secondItem="ejz-5J-R8a" secondAttribute="bottom" constant="8" id="9Yo-jB-2fE"/>
+                            <constraint firstAttribute="centerX" secondItem="fJj-GW-hFx" secondAttribute="centerX" id="Aev-1k-7pB"/>
+                            <constraint firstItem="izW-Fe-bO7" firstAttribute="top" secondItem="fJj-GW-hFx" secondAttribute="bottom" constant="8" id="FJt-VR-nUl"/>
+                            <constraint firstAttribute="centerX" secondItem="f6I-uq-XfX" secondAttribute="centerX" id="GHW-yL-YJi"/>
+                            <constraint firstAttribute="centerX" secondItem="6Nj-e2-LNa" secondAttribute="centerX" id="NDc-4v-7YN"/>
+                            <constraint firstAttribute="centerX" secondItem="ejz-5J-R8a" secondAttribute="centerX" id="OWd-U7-Wvz"/>
+                            <constraint firstAttribute="centerX" secondItem="izW-Fe-bO7" secondAttribute="centerX" id="XvD-Nd-ZGr"/>
+                            <constraint firstAttribute="centerX" secondItem="6Nj-e2-LNa" secondAttribute="centerX" id="gbl-hG-RC9"/>
+                            <constraint firstItem="fJj-GW-hFx" firstAttribute="top" secondItem="cWE-Su-jcs" secondAttribute="bottom" constant="8" id="iEh-1K-Kul"/>
+                            <constraint firstAttribute="centerX" secondItem="cWE-Su-jcs" secondAttribute="centerX" id="iMW-wb-4Qj"/>
+                            <constraint firstItem="cWE-Su-jcs" firstAttribute="top" secondItem="6Nj-e2-LNa" secondAttribute="bottom" constant="8" id="nVe-89-oEG"/>
+                            <constraint firstItem="ejz-5J-R8a" firstAttribute="top" secondItem="f6I-uq-XfX" secondAttribute="bottom" constant="24" id="pGi-mh-UQm"/>
+                            <constraint firstItem="qQi-9Y-ymY" firstAttribute="top" secondItem="izW-Fe-bO7" secondAttribute="bottom" constant="8" id="xRu-6c-Vuu"/>
+                            <constraint firstAttribute="centerX" secondItem="3Dy-bQ-sVf" secondAttribute="centerX" id="xSp-Qn-jOW"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="textField" destination="3Dy-bQ-sVf" id="3oT-GD-vBe"/>
+                        <outlet property="textToDisplay" destination="f6I-uq-XfX" id="l3r-tY-gdb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
