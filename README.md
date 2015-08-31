@@ -1,5 +1,5 @@
 # BHKeychainSwift
-A wrapper that contains helper functions for saving text and data in the keychain.
+A wrapper that contains helper functions for saving and retrieving text and data in the keychain.
 
 ![ss](https://raw.githubusercontent.com/iPhonig/BHKeychainSwift/master/KeychainSwiftExample/ss.png)
 
