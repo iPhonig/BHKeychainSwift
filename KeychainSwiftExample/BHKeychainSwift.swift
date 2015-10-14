@@ -7,38 +7,48 @@
 
 import UIKit
 import Security
-
+import LocalAuthentication
 
 /**
 A collection of helper functions for saving text and data in the keychain.
 */
+
 public class BHKeychainSwift {
     
-    public enum BHKeychainKeyType{
+    public enum KeychainKeyType{
         case Public
         case Private
         case Password
     }
     
-    public class func storeKeyOfType(type: BHKeychainKeyType, keyData: String, accountName: String, applicationTag: String) -> Bool{
+    /**
+    Store Key
+    
+    - Parameters:
+    - type: KeyKeyType such as Public, Private, Password
+    - keyData: the text to store
+    - accountName: the name of the user of the app usually
+    - applicationTag: the identifying tag for the data e.g. 'com.appname.key.public'
+    */
+    public class func storeKeyOfType(type: KeychainKeyType, keyData: String, accountName: String, applicationTag: String) -> Bool{
         
-        if type == BHKeychainKeyType.Public{
-            generateQuery(BHKeychainKeyType.Public, keyData: keyData, accountName: accountName, applicationTag: applicationTag)
-        }else if type == BHKeychainKeyType.Private{
-            generateQuery(BHKeychainKeyType.Private, keyData: keyData, accountName: accountName, applicationTag: applicationTag)
-        }else if type == BHKeychainKeyType.Password{
-            generateQuery(BHKeychainKeyType.Password, keyData: keyData, accountName: accountName, applicationTag: applicationTag)
+        if type == KeychainKeyType.Public{
+            generateQuery(KeychainKeyType.Public, keyData: keyData, accountName: accountName, applicationTag: applicationTag)
+        }else if type == KeychainKeyType.Private{
+            generateQuery(KeychainKeyType.Private, keyData: keyData, accountName: accountName, applicationTag: applicationTag)
+        }else if type == KeychainKeyType.Password{
+            generateQuery(KeychainKeyType.Password, keyData: keyData, accountName: accountName, applicationTag: applicationTag)
         }
         
         return false
     }
     
-    //MARK: Generate Query
-    class func generateQuery(type: BHKeychainKeyType, keyData: String, accountName: String, applicationTag: String) -> Dictionary<String, AnyObject>{
+    //gerneate the query for store or get
+    private class func generateQuery(type: KeychainKeyType, keyData: String, accountName: String, applicationTag: String) -> Dictionary<String, AnyObject>{
         
-        var keyDataAsData = keyData.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) as NSData!
+        let keyDataAsData = keyData.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) as NSData!
         
-        if type == BHKeychainKeyType.Public{
+        if type == KeychainKeyType.Public{
             
             let query = [
                 kSecClass as String : kSecClassKey as String,
@@ -50,12 +60,12 @@ public class BHKeychainSwift {
             SecItemDelete(query as CFDictionaryRef)
             let status: OSStatus = SecItemAdd(query as CFDictionaryRef, nil)
             
-            println("\(status == noErr)")
+            print("\(status == noErr)")
             
             return query
             
-        }else if type == BHKeychainKeyType.Private{
-
+        }else if type == KeychainKeyType.Private{
+            
             let query = [
                 kSecClass as String : kSecClassKey as String,
                 kSecAttrApplicationTag as String : applicationTag,
@@ -66,7 +76,7 @@ public class BHKeychainSwift {
             SecItemDelete(query as CFDictionaryRef)
             let status: OSStatus = SecItemAdd(query as CFDictionaryRef, nil)
             
-            println("\(status == noErr)")
+            print("\(status == noErr)")
             
             return query
             
@@ -82,15 +92,23 @@ public class BHKeychainSwift {
             SecItemDelete(query as CFDictionaryRef)
             
             let status: OSStatus = SecItemAdd(query as CFDictionaryRef, nil)
-            println("\(status == noErr)")
+            print("\(status == noErr)")
             
             return query
         }
     }
     
-    //MARK: Get Key
-    public class func get(type: BHKeychainKeyType, accountName: String, applicationTag: String) -> NSData?{
-        if type == BHKeychainKeyType.Public{
+    /**
+    Get Key
+    
+    - Parameters:
+    - type: KeyKeyType such as Public, Private, Password
+    - accountName: the name of the user of the app usually
+    - applicationTag: the identifying tag for the data e.g. 'com.appname.key.public'
+    */
+    public class func get(type: KeychainKeyType, accountName: String, applicationTag: String) -> NSData?{
+        
+        if type == KeychainKeyType.Public{
             let query = [
                 kSecClass as String : kSecClassKey as String,
                 kSecAttrAccessible as String : kSecAttrAccessibleWhenUnlocked as String,
@@ -100,17 +118,16 @@ public class BHKeychainSwift {
                 kSecMatchLimit as String  : kSecMatchLimitOne
             ]
             
-            var dataTypeRef :Unmanaged<AnyObject>?
+            var retrievedData: NSData?
+            var extractedData: AnyObject?
+            let status = SecItemCopyMatching(query, &extractedData)
             
-            let status: OSStatus = SecItemCopyMatching(query, &dataTypeRef)
-            
-            if status == noErr {
-                return (dataTypeRef?.takeRetainedValue() as! NSData)
-            } else {
-                return nil
+            if (status == errSecSuccess) {
+                retrievedData = extractedData as? NSData
+                return retrievedData!
             }
-
-        }else if type == BHKeychainKeyType.Private{
+            
+        }else if type == KeychainKeyType.Private{
             let query = [
                 kSecClass as String : kSecClassKey as String,
                 kSecAttrAccessible as String : kSecAttrAccessibleWhenUnlocked as String,
@@ -120,16 +137,16 @@ public class BHKeychainSwift {
                 kSecMatchLimit as String  : kSecMatchLimitOne
             ]
             
-            var dataTypeRef :Unmanaged<AnyObject>?
+            var dataTypeRef: AnyObject?
             
             let status: OSStatus = SecItemCopyMatching(query, &dataTypeRef)
             
             if status == noErr {
-                return (dataTypeRef?.takeRetainedValue() as! NSData)
+                return (dataTypeRef as! NSData)
             } else {
                 return nil
             }
-
+            
         }else{
             let query = [
                 kSecClass as String       : kSecClassGenericPassword as String,
@@ -138,15 +155,17 @@ public class BHKeychainSwift {
                 kSecReturnData as String  : kCFBooleanTrue,
                 kSecMatchLimit as String  : kSecMatchLimitOne ]
             
-            var dataTypeRef :Unmanaged<AnyObject>?
+            var retrievedData: NSData?
+            var extractedData: AnyObject?
+            let status = SecItemCopyMatching(query, &extractedData)
             
-            let status: OSStatus = SecItemCopyMatching(query, &dataTypeRef)
-            
-            if status == noErr {
-                return (dataTypeRef?.takeRetainedValue() as! NSData)
-            } else {
+            if (status == errSecSuccess) {
+                retrievedData = extractedData as? NSData
+                return retrievedData!
+            }else{
                 return nil
             }
         }
+        return nil
     }
 }

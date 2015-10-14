@@ -162,6 +162,8 @@
 		FE6E47DE1B93E32F00D18625 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = "iPhonig, LLC";
 				TargetAttributes = {
@@ -417,6 +419,7 @@
 				FE6E48071B93E32F00D18625 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FE6E48081B93E32F00D18625 /* Build configuration list for PBXNativeTarget "KeychainSwiftExampleTests" */ = {
 			isa = XCConfigurationList;
@@ -425,6 +428,7 @@
 				FE6E480A1B93E32F00D18625 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
